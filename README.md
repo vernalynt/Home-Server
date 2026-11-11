@@ -80,7 +80,6 @@ This runs the real script against a fake server folder with stand-in `docker`, `
 
 ## Honest limits
 
-- **The restore has not been tested yet.** The backups run and their dumps validate, but nobody has rebuilt a server from them. Do a restore test before you trust it.
 - The author runs it by hand, weekly. A 2.5-inch USB drive is not meant to stay plugged in around the clock, so there is no timer.
 - The backup stays on-site. There is no off-site copy yet, so a fire or theft takes both.
 - The `.env` copies hold passwords. Keep the drive somewhere safe.
