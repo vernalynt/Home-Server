@@ -1,4 +1,4 @@
-# Mewseum
+# Home-Server
 
 A small, private home server that one person built from an old tower PC: photos, files, a pantry tracker and an ADHD dashboard, reachable only from their own devices, backed up to a USB drive. This repo shows the layout and holds the backup script. The point is simple: **you can do this, and it does not need to be fancy.**
 
@@ -7,7 +7,7 @@ A small, private home server that one person built from an old tower PC: photos,
 ```mermaid
 flowchart LR
     phone[Phone / laptop<br/>with Tailscale] -->|private network| srv
-    subgraph srv[Mewseum: Ubuntu + Docker]
+    subgraph srv[Home-Server: Ubuntu + Docker]
       immich[Immich<br/>photos]
       nc[Nextcloud<br/>files]
       adhd[ADHDpls<br/>notes and reminders]
@@ -24,7 +24,7 @@ flowchart LR
 | Files | [Nextcloud](https://nextcloud.com/) | upstream |
 | Notes and reminders | ADHDpls | `adhdpls` |
 | Pantry tracker | Pantrypls | `pantrypls` |
-| Backups | `backup/mewseum-backup.sh` | this one |
+| Backups | `backup/Home-Server-backup.sh` | this one |
 
 ## Three rules the setup follows
 
@@ -34,7 +34,7 @@ flowchart LR
 
 ## The backup script
 
-`backup/mewseum-backup.sh` copies a Docker server to an external drive.
+`backup/Home-Server-backup.sh` copies a Docker server to an external drive.
 
 | Step | What happens |
 |---|---|
@@ -60,8 +60,8 @@ cp backup/backup.conf.example backup/backup.conf
 nano backup/backup.conf                      # set DRIVE_LABEL and your paths
 lsblk -o NAME,LABEL,SIZE,FSTYPE              # find your drive's label
 sudo mount /dev/sdX1 /mnt/backup             # mount it (read-write)
-sudo bash backup/mewseum-backup.sh --check   # dry look, writes nothing
-sudo bash backup/mewseum-backup.sh           # the real thing
+sudo bash backup/Home-Server-backup.sh --check   # dry look, writes nothing
+sudo bash backup/Home-Server-backup.sh           # the real thing
 ```
 
 Every setting is in `backup.conf` (`backup.conf` is git-ignored, so your names stay private).
