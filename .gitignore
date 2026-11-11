@@ -1,0 +1,18 @@
+# Your own settings and secrets
+backup/backup.conf
+.env
+*.pem
+*.key
+
+# Backups and dumps must never be committed
+*.sql
+*.sql.gz
+*.db
+*.part
+Mewseum-Backup/
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,39 @@
+# Copy this file to backup.conf (same folder as the script) and edit it.
+# backup.conf is ignored by git, so your own names stay private.
+
+# Where your backup drive is mounted, and its label.
+# The label is a SAFETY CHECK: the script refuses to run if the drive mounted here has a
+# different label. Find yours with:   lsblk -o NAME,LABEL,SIZE,FSTYPE
+MNT=/mnt/backup
+DRIVE_LABEL="MY_BACKUP_DRIVE"
+
+# Where your containers keep their data (everything below is relative to this folder).
+SRV=/srv/data
+
+# Folder created at the top of the drive, and how many days of database dumps to keep.
+DEST_NAME=Mewseum-Backup
+KEEP_DAYS=14
+
+# --- Immich (photos). Set to 0 if you do not run it. ---
+ENABLE_IMMICH=1
+# UPLOAD_LOCATION from Immich's .env
+IMMICH_LIB=/srv/data/immich/library
+IMMICH_DB_C=immich_postgres
+IMMICH_DB_USER=postgres
+IMMICH_DB_NAME=immich
+
+# --- Nextcloud (files). Set to 0 if you do not run it. ---
+# Container names depend on your compose project, check them with:   docker ps --format '{{.Names}}'
+ENABLE_NEXTCLOUD=1
+NC_APP_C=nextcloud-app-1
+NC_DB_C=nextcloud-db-1
+NC_HTML=/srv/data/nextcloud/html
+
+# --- Small apps with SQLite databases (like Pantrypls and ADHDpls) ---
+# Folders under SRV. Every .db file inside is copied safely, the rest as plain files.
+APPS="adhdpls pantrypls"
+
+# --- Compose files and settings to keep, so you can rebuild the containers ---
+# Files and folders under SRV. WARNING: .env files usually hold passwords.
+CONFIG_FILES="immich/docker-compose.yml immich/.env nextcloud/docker-compose.yml nextcloud/.env"
+CONFIG_DIRS="adhdpls-app pantrypls-app"
